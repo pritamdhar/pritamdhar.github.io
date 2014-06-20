@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Height and weight of schoolchildren</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Height and weight of schoolchildren">
+  <meta name="author" content="Pritam Dhar">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Height and weight of schoolchildren</h1>
+    <h2></h2>
+    <p>Pritam Dhar<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Motivation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>We analyze the gender, age height and weight of a sample data for school children. Here is a initial plot showing age in the x axis and height in the y axis in the dataset.</p>
+
+<pre><code class="r">library(ggplot2)
+hw &lt;- read.csv(&quot;heightweight.csv&quot;)
+aes_mapping &lt;- aes_string(x = &quot;ageYear&quot;, y = &quot;heightIn&quot;)
+points &lt;- geom_point(shape = 21, alpha = 1)
+p &lt;- ggplot(hw, mapping = aes_mapping) +  
+  points + 
+  theme_bw() + 
+  scale_x_continuous(&quot;ageYear&quot;) +
+  scale_y_continuous(&quot;heightIn&quot;) +
+  scale_colour_hue(l = 40) + 
+  scale_shape(solid = FALSE)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Motivation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The chart below, shows the distribution as per the code in the previous slide</p>
+
+<pre><code class="r">print(p)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-2.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Model Creation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>We can create and use different models to show the impact of one variable has on another. Also, the model can generate as per the gender. Code below creates a linear model with the necessary changes made to incorporate gender.</p>
+
+<pre><code class="r">aes_mapping &lt;- aes_string(x = &quot;ageYear&quot;, y = &quot;heightIn&quot;, colour = &quot;sex&quot;, shape = &quot;sex&quot;)
+points &lt;- geom_point(solid = FALSE, alpha = 1)
+
+p &lt;- ggplot(hw, mapping = aes_mapping) +
+  points +
+  theme_bw() +
+  scale_colour_hue(l = 40) +
+  scale_shape(solid = FALSE)
+
+p &lt;- p + geom_smooth(method = lm, se = FALSE, size = 0.75,
+                     linetype = &quot;dotdash&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Model Creation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The chart below, shows the distribution as per the code in the previous slide</p>
+
+<pre><code class="r">print(p)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Motivation'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Motivation'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Model Creation'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Model Creation'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
